@@ -63,15 +63,16 @@
       lunr.tokenizer = lunr.ja.tokenizer;
     };
 
+    var segmenter = new Intl.Segmenter('ja', { granularity: 'word' });
+
     lunr.ja.tokenizer = function(obj) {
       if (!arguments.length || obj == null || obj == undefined) return []
       if (Array.isArray(obj)) return obj.map(function(t) { return t.toLowerCase() })
 
       var str = obj.toString().trim();
-      var segmenter = new Intl.Segmenter('ja', { granularity: 'word' });
       return Array.from(segmenter.segment(str))
         .filter(function(s) { return s.isWordLike })
-        .map(function(s) { return s.segment });
+        .map(function(s) { return s.segment.toLowerCase() });
     };
 
     /* lunr stemmer function */
