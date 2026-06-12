@@ -141,5 +141,9 @@ console.log('Building Multi-Language Extension');
 // build multi
 var multi = fs.readFileSync('lunr.multi.js', 'utf8');
 fs.writeFileSync('min/lunr.multi.min.js', compress(multi));
+console.log('Building Japanese (ja) Language');
+// build ja (manually managed, not template-generated)
+var ja = fs.readFileSync('lunr.ja.js', 'utf8');
+fs.writeFileSync('min/lunr.ja.min.js', compress(ja));
 
 console.log('Done!');
